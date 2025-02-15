@@ -21,7 +21,7 @@ func _physics_process(delta: float) -> void:
 		
 		# Make falling a bit faster than jumping
 		if is_falling:
-			velocity.y *= 1.1
+			velocity.y *= 1 + (delta)
 
 	# Handle jump.
 	if Input.is_action_just_pressed("ui_accept") and is_on_floor():

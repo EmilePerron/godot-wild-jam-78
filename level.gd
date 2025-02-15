@@ -2,6 +2,7 @@ extends Node2D
 
 const BASE_SPEED := 250
 
+@export var level_number: int = 1
 @export var speed_multiplier := 1.0
 @export var victory_area: Area2D
 
@@ -19,8 +20,6 @@ func _physics_process(delta: float) -> void:
 func _on_victory(body: Node2D) -> void:
 	if body.name != "Player":
 		return
-		
-	# Level completed!
-	speed_multiplier = 0.0
+
 	GameManager.instance.level_completed.emit()
 	

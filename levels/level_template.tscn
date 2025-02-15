@@ -1,0 +1,63 @@
+[gd_scene load_steps=7 format=3 uid="uid://dti3jikpaeejb"]
+
+[ext_resource type="Script" path="res://level.gd" id="1_dum5m"]
+[ext_resource type="Texture2D" uid="uid://dfg08e31v64vb" path="res://assets/cell.svg" id="2_o8xxy"]
+[ext_resource type="PackedScene" uid="uid://br6g6ah8hgvd0" path="res://obstacle.tscn" id="3_a3rhe"]
+[ext_resource type="Script" path="res://obstacle.gd" id="4_etcxt"]
+[ext_resource type="PackedScene" uid="uid://nrv00khg2246" path="res://victory_area.tscn" id="5_1xwnk"]
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_k7hj2"]
+a = Vector2(-240, 0)
+b = Vector2(11200, 0)
+
+[node name="Level" type="Node2D" node_paths=PackedStringArray("victory_area")]
+script = ExtResource("1_dum5m")
+speed_multiplier = null
+victory_area = NodePath("VictoryArea2D")
+
+[node name="GridPaper" type="Sprite2D" parent="."]
+z_index = -1
+texture_filter = 1
+texture_repeat = 2
+texture = ExtResource("2_o8xxy")
+centered = false
+offset = Vector2(-240, -768)
+region_enabled = true
+region_rect = Rect2(0, 0, 10240, 1536)
+metadata/_edit_lock_ = true
+
+[node name="Floor" type="StaticBody2D" parent="."]
+position = Vector2(0, 4)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
+shape = SubResource("SegmentShape2D_k7hj2")
+
+[node name="Line2D" type="Line2D" parent="Floor"]
+points = PackedVector2Array(-240, 0, 11200, 0)
+width = 8.0
+default_color = Color(0.376028, 0.376029, 0.376028, 1)
+
+[node name="Obstacles" type="Node2D" parent="."]
+
+[node name="Obstacle" parent="Obstacles" instance=ExtResource("3_a3rhe")]
+position = Vector2(348, -45)
+script = ExtResource("4_etcxt")
+
+[node name="Obstacle2" parent="Obstacles" instance=ExtResource("3_a3rhe")]
+position = Vector2(629, -45)
+script = ExtResource("4_etcxt")
+
+[node name="Obstacle3" parent="Obstacles" instance=ExtResource("3_a3rhe")]
+position = Vector2(911, -51)
+script = ExtResource("4_etcxt")
+
+[node name="Obstacle4" parent="Obstacles" instance=ExtResource("3_a3rhe")]
+position = Vector2(911, -118)
+script = ExtResource("4_etcxt")
+
+[node name="VictoryArea2D" parent="." instance=ExtResource("5_1xwnk")]
+
+[node name="CollisionShape2D" parent="VictoryArea2D" index="0"]
+position = Vector2(1207, -148)
+
+[editable path="VictoryArea2D"]
