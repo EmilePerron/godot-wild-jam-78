@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://br6g6ah8hgvd0"]
+
+[ext_resource type="Script" path="res://obstacle.gd" id="1_asai7"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ae6ti"]
+size = Vector2(32, 32)
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Obstacle" type="Node2D" parent="."]
+script = ExtResource("1_asai7")
+
+[node name="Polygon2D" type="Polygon2D" parent="Obstacle"]
+color = Color(0.118581, 0.118581, 0.118581, 1)
+polygon = PackedVector2Array(-16, -16, -16, 16, 16, 16, 16, -16)
+
+[node name="Area2D" type="Area2D" parent="Obstacle/Polygon2D"]
+metadata/is_obstacle_area2d = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Obstacle/Polygon2D/Area2D"]
+shape = SubResource("RectangleShape2D_ae6ti")
+
+[connection signal="body_entered" from="Obstacle/Polygon2D/Area2D" to="Obstacle" method="_on_area_2d_body_entered"]
