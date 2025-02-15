@@ -45,5 +45,10 @@ func _on_eraser_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx
 	if event is not InputEventMouseButton or not event.is_pressed() or hovered_obstacle == null:
 		return
 		
+	if not EraserCounter.can_erase():
+		# TODO: Show some kind of error indicator
+		return
+	
+	EraserCounter.decrement()
 	hovered_obstacle.queue_free()
 	hovered_obstacle = null
