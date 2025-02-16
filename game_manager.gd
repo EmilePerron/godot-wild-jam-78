@@ -9,8 +9,10 @@ static var instance: GameManager
 var _game_is_active := true
 
 @export var level_completed_overlay: Control
+@export var level_failed_overlay: Control
 @export var victory_overlay: Control
 
+@onready var _player = $Player
 @onready var _current_level = $Level
 @onready var _current_level_label = $UI/LevelLabel
 
@@ -34,7 +36,13 @@ func _on_level_completed() -> void:
 	
 
 func _on_player_died(message: String) -> void:
-	get_tree().quit()
+	var label = level_failed_overlay.get_node("CenterContainer/Modal/VBoxContainer/Label")
+	label.text = "Uh oh.\n" + message + "\n\n"
+	
+	_game_is_active = false
+	level_failed_overlay.visible = true
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	get_tree().paused = true
 	
 
 func _notification(notification):
@@ -77,9 +85,15 @@ func load_level(level: int) -> void:
 	previous_level.queue_free()
 	
 	_current_level_label.text = "Level " + str(level)
+	_player.reset_position()
 	EraserCounter.refill()
 	
 	level_completed_overlay.visible = false
+	level_failed_overlay.visible = false
 	_game_is_active = true
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	get_tree().paused = false
+
+
+func restart_current_level() -> void:
+	load_level(_current_level.level_number)

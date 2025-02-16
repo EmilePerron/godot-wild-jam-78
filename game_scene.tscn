@@ -29,9 +29,10 @@ size = Vector2(300, 1537)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4xaui"]
 size = Vector2(32589, 206.5)
 
-[node name="GameManager" type="Node2D" node_paths=PackedStringArray("level_completed_overlay", "victory_overlay")]
+[node name="GameManager" type="Node2D" node_paths=PackedStringArray("level_completed_overlay", "level_failed_overlay", "victory_overlay")]
 script = ExtResource("1_nxh51")
 level_completed_overlay = NodePath("Camera2D/LevelCompletedOverlay")
+level_failed_overlay = NodePath("Camera2D/LevelFailedOverlay")
 victory_overlay = NodePath("Camera2D/VictoryOverlay")
 
 [node name="Player" type="CharacterBody2D" parent="."]
@@ -108,6 +109,65 @@ size_flags_horizontal = 4
 text = "Back to menu"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Camera2D/LevelCompletedOverlay/CenterContainer/Modal/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="LevelFailedOverlay" type="Control" parent="Camera2D"]
+process_mode = 2
+visible = false
+top_level = true
+layout_mode = 3
+anchors_preset = 0
+
+[node name="Backdrop" type="ColorRect" parent="Camera2D/LevelFailedOverlay"]
+layout_mode = 0
+offset_left = -227.0
+offset_top = -512.0
+offset_right = 797.0
+offset_bottom = 256.0
+color = Color(0.258808, 1.18823e-07, 3.60981e-08, 0.352941)
+
+[node name="CenterContainer" type="CenterContainer" parent="Camera2D/LevelFailedOverlay"]
+layout_mode = 0
+offset_left = -227.0
+offset_top = -512.0
+offset_right = 797.0
+offset_bottom = 256.0
+
+[node name="Modal" type="ColorRect" parent="Camera2D/LevelFailedOverlay/CenterContainer"]
+custom_minimum_size = Vector2(600, 400)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Camera2D/LevelFailedOverlay/CenterContainer/Modal"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="Camera2D/LevelFailedOverlay/CenterContainer/Modal/VBoxContainer"]
+layout_mode = 2
+text = "Uh oh.
+
+"
+label_settings = SubResource("LabelSettings_ts2ks")
+horizontal_alignment = 1
+
+[node name="TryAgainButton" type="Button" parent="Camera2D/LevelFailedOverlay/CenterContainer/Modal/VBoxContainer"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Try again"
+
+[node name="MenuButton" type="Button" parent="Camera2D/LevelFailedOverlay/CenterContainer/Modal/VBoxContainer"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Back to menu"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Camera2D/LevelFailedOverlay/CenterContainer/Modal/VBoxContainer"]
 layout_mode = 2
 alignment = 1
 
@@ -217,6 +277,7 @@ position = Vector2(15734.5, 872.75)
 shape = SubResource("RectangleShape2D_4xaui")
 
 [connection signal="pressed" from="Camera2D/LevelCompletedOverlay/CenterContainer/Modal/VBoxContainer/NextButton" to="." method="load_next_level"]
+[connection signal="pressed" from="Camera2D/LevelFailedOverlay/CenterContainer/Modal/VBoxContainer/TryAgainButton" to="." method="restart_current_level"]
 [connection signal="area_entered" from="UI/EraserCursor/EraserArea2D" to="UI/EraserCursor" method="_on_eraser_area_2d_area_entered"]
 [connection signal="area_exited" from="UI/EraserCursor/EraserArea2D" to="UI/EraserCursor" method="_on_eraser_area_2d_area_exited"]
 [connection signal="input_event" from="UI/EraserCursor/EraserArea2D" to="UI/EraserCursor" method="_on_eraser_area_2d_input_event"]

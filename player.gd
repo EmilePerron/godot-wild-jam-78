@@ -6,6 +6,10 @@ const FALL_SPEED_MULTIPLIER := 3.0
 const JUMP_VELOCITY := -1000.0
 
 
+func reset_position() -> void:
+	position = Vector2(0, 0)
+
+
 func _physics_process(delta: float) -> void:
 	if not is_on_floor(): 
 		var is_falling = velocity.y > 0
