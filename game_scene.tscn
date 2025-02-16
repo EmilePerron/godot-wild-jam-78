@@ -29,9 +29,10 @@ size = Vector2(300, 1537)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4xaui"]
 size = Vector2(32589, 206.5)
 
-[node name="GameManager" type="Node2D" node_paths=PackedStringArray("win_overlay")]
+[node name="GameManager" type="Node2D" node_paths=PackedStringArray("level_completed_overlay", "victory_overlay")]
 script = ExtResource("1_nxh51")
-win_overlay = NodePath("Camera2D/WinOverlay")
+level_completed_overlay = NodePath("Camera2D/LevelCompletedOverlay")
+victory_overlay = NodePath("Camera2D/VictoryOverlay")
 
 [node name="Player" type="CharacterBody2D" parent="."]
 script = ExtResource("1_g2ulq")
@@ -51,14 +52,14 @@ shape = SubResource("CapsuleShape2D_bxn4m")
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(285, -128)
 
-[node name="WinOverlay" type="Control" parent="Camera2D"]
+[node name="LevelCompletedOverlay" type="Control" parent="Camera2D"]
 process_mode = 2
 visible = false
 top_level = true
 layout_mode = 3
 anchors_preset = 0
 
-[node name="Backdrop" type="ColorRect" parent="Camera2D/WinOverlay"]
+[node name="Backdrop" type="ColorRect" parent="Camera2D/LevelCompletedOverlay"]
 layout_mode = 0
 offset_left = -227.0
 offset_top = -512.0
@@ -66,18 +67,18 @@ offset_right = 797.0
 offset_bottom = 256.0
 color = Color(0, 0, 0, 0.352941)
 
-[node name="CenterContainer" type="CenterContainer" parent="Camera2D/WinOverlay"]
+[node name="CenterContainer" type="CenterContainer" parent="Camera2D/LevelCompletedOverlay"]
 layout_mode = 0
 offset_left = -227.0
 offset_top = -512.0
 offset_right = 797.0
 offset_bottom = 256.0
 
-[node name="Modal" type="ColorRect" parent="Camera2D/WinOverlay/CenterContainer"]
+[node name="Modal" type="ColorRect" parent="Camera2D/LevelCompletedOverlay/CenterContainer"]
 custom_minimum_size = Vector2(600, 400)
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Camera2D/WinOverlay/CenterContainer/Modal"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Camera2D/LevelCompletedOverlay/CenterContainer/Modal"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -86,25 +87,81 @@ grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
 
-[node name="Label" type="Label" parent="Camera2D/WinOverlay/CenterContainer/Modal/VBoxContainer"]
+[node name="Label" type="Label" parent="Camera2D/LevelCompletedOverlay/CenterContainer/Modal/VBoxContainer"]
 layout_mode = 2
-text = "You win!"
+text = "Level completed!
+
+"
 label_settings = SubResource("LabelSettings_ts2ks")
 horizontal_alignment = 1
 
-[node name="NextButton" type="Button" parent="Camera2D/WinOverlay/CenterContainer/Modal/VBoxContainer"]
+[node name="NextButton" type="Button" parent="Camera2D/LevelCompletedOverlay/CenterContainer/Modal/VBoxContainer"]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 text = "Next level"
 
-[node name="MenuButton" type="Button" parent="Camera2D/WinOverlay/CenterContainer/Modal/VBoxContainer"]
+[node name="MenuButton" type="Button" parent="Camera2D/LevelCompletedOverlay/CenterContainer/Modal/VBoxContainer"]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 text = "Back to menu"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Camera2D/WinOverlay/CenterContainer/Modal/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Camera2D/LevelCompletedOverlay/CenterContainer/Modal/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="VictoryOverlay" type="Control" parent="Camera2D"]
+process_mode = 2
+visible = false
+top_level = true
+layout_mode = 3
+anchors_preset = 0
+
+[node name="Backdrop" type="ColorRect" parent="Camera2D/VictoryOverlay"]
+layout_mode = 0
+offset_left = -227.0
+offset_top = -512.0
+offset_right = 797.0
+offset_bottom = 256.0
+color = Color(0, 0, 0, 0.352941)
+
+[node name="CenterContainer" type="CenterContainer" parent="Camera2D/VictoryOverlay"]
+layout_mode = 0
+offset_left = -227.0
+offset_top = -512.0
+offset_right = 797.0
+offset_bottom = 256.0
+
+[node name="Modal" type="ColorRect" parent="Camera2D/VictoryOverlay/CenterContainer"]
+custom_minimum_size = Vector2(600, 400)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Camera2D/VictoryOverlay/CenterContainer/Modal"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="Camera2D/VictoryOverlay/CenterContainer/Modal/VBoxContainer"]
+layout_mode = 2
+text = "Victory!
+You've completed the entire game!
+
+"
+label_settings = SubResource("LabelSettings_ts2ks")
+horizontal_alignment = 1
+
+[node name="MenuButton" type="Button" parent="Camera2D/VictoryOverlay/CenterContainer/Modal/VBoxContainer"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Back to menu"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Camera2D/VictoryOverlay/CenterContainer/Modal/VBoxContainer"]
 layout_mode = 2
 alignment = 1
 
@@ -159,7 +216,7 @@ shape = SubResource("RectangleShape2D_x0ui8")
 position = Vector2(15734.5, 872.75)
 shape = SubResource("RectangleShape2D_4xaui")
 
-[connection signal="pressed" from="Camera2D/WinOverlay/CenterContainer/Modal/VBoxContainer/NextButton" to="." method="load_next_level"]
+[connection signal="pressed" from="Camera2D/LevelCompletedOverlay/CenterContainer/Modal/VBoxContainer/NextButton" to="." method="load_next_level"]
 [connection signal="area_entered" from="UI/EraserCursor/EraserArea2D" to="UI/EraserCursor" method="_on_eraser_area_2d_area_entered"]
 [connection signal="area_exited" from="UI/EraserCursor/EraserArea2D" to="UI/EraserCursor" method="_on_eraser_area_2d_area_exited"]
 [connection signal="input_event" from="UI/EraserCursor/EraserArea2D" to="UI/EraserCursor" method="_on_eraser_area_2d_input_event"]

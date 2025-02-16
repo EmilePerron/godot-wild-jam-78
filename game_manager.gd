@@ -8,7 +8,8 @@ static var instance: GameManager
 
 var _game_is_active := true
 
-@export var win_overlay: Control
+@export var level_completed_overlay: Control
+@export var victory_overlay: Control
 
 @onready var _current_level = $Level
 @onready var _current_level_label = $UI/LevelLabel
@@ -22,10 +23,14 @@ func _ready() -> void:
 
 
 func _on_level_completed() -> void:
-	win_overlay.visible = true
 	_game_is_active = false
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	get_tree().paused = true
+	
+	if has_next_level():
+		level_completed_overlay.visible = true
+	else:
+		victory_overlay.visible = true
 	
 
 func _on_player_died(message: String) -> void:
@@ -49,16 +54,22 @@ func load_next_level() -> void:
 	load_level(_current_level.level_number + 1)
 	
 
+func has_next_level() -> bool:
+	var next_level_path = _level_path(_current_level.level_number + 1)
+	
+	return ResourceLoader.exists(next_level_path, "PackedScene")
+		
+
+func _level_path(level: int) -> String:
+	var padded_level = ("0" if level < 10 else "") + str(level)
+	
+	return "res://levels/level_" + padded_level + ".tscn"
+
+
 func load_level(level: int) -> void:
 	_show_loader()
 	
-	var padded_level = ("0" if level < 10 else "") + str(level)
-	var new_level_path = "res://levels/level_" + padded_level + ".tscn"
-	
-	# When there's no more levels, show a YOU WIN! screen
-	if not ResourceLoader.exists(new_level_path, "PackedScene"):
-		return 
-	
+	var new_level_path = _level_path(level)
 	var new_level_scene = load(new_level_path)
 	var previous_level = _current_level
 	_current_level = new_level_scene.instantiate()
@@ -68,7 +79,7 @@ func load_level(level: int) -> void:
 	_current_level_label.text = "Level " + str(level)
 	EraserCounter.refill()
 	
-	win_overlay.visible = false
+	level_completed_overlay.visible = false
 	_game_is_active = true
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	get_tree().paused = false
