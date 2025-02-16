@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://n3awr57d1wr5"]
+[gd_scene load_steps=13 format=3 uid="uid://n3awr57d1wr5"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_g2ulq"]
 [ext_resource type="Script" path="res://game_manager.gd" id="1_nxh51"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://g7ghmq6j1uhq" path="res://assets/yellow_circle.svg" id="5_hdlq8"]
 [ext_resource type="Script" path="res://eraser_cursor.gd" id="5_iacd0"]
 [ext_resource type="Script" path="res://eraser_counter.gd" id="6_mua3w"]
+[ext_resource type="Script" path="res://out_of_bounds_area.gd" id="7_8bbpv"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_bxn4m"]
 radius = 24.0
@@ -17,6 +18,12 @@ font_color = Color(0, 0, 0, 1)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_3e3hn"]
 radius = 24.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x0ui8"]
+size = Vector2(300, 1537)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4xaui"]
+size = Vector2(32589, 206.5)
 
 [node name="GameManager" type="Node2D" node_paths=PackedStringArray("win_overlay")]
 script = ExtResource("1_nxh51")
@@ -129,7 +136,19 @@ fill_mode = 2
 show_percentage = false
 script = ExtResource("6_mua3w")
 
+[node name="OutOfBoundsArea" type="Area2D" parent="."]
+script = ExtResource("7_8bbpv")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="OutOfBoundsArea"]
+position = Vector2(-412, -2.5)
+shape = SubResource("RectangleShape2D_x0ui8")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="OutOfBoundsArea"]
+position = Vector2(15734.5, 872.75)
+shape = SubResource("RectangleShape2D_4xaui")
+
 [connection signal="pressed" from="Camera2D/WinOverlay/CenterContainer/Modal/VBoxContainer/NextButton" to="." method="load_next_level"]
 [connection signal="area_entered" from="UI/EraserCursor/EraserArea2D" to="UI/EraserCursor" method="_on_eraser_area_2d_area_entered"]
 [connection signal="area_exited" from="UI/EraserCursor/EraserArea2D" to="UI/EraserCursor" method="_on_eraser_area_2d_area_exited"]
 [connection signal="input_event" from="UI/EraserCursor/EraserArea2D" to="UI/EraserCursor" method="_on_eraser_area_2d_input_event"]
+[connection signal="body_entered" from="OutOfBoundsArea" to="OutOfBoundsArea" method="_on_body_entered"]

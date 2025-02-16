@@ -1,9 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://ddkw4hlw0b3ua"]
+[gd_scene load_steps=6 format=3 uid="uid://ddkw4hlw0b3ua"]
 
 [ext_resource type="Script" path="res://level.gd" id="1_6d627"]
 [ext_resource type="Texture2D" uid="uid://dfg08e31v64vb" path="res://assets/cell.svg" id="2_dwq78"]
 [ext_resource type="PackedScene" uid="uid://br6g6ah8hgvd0" path="res://obstacle.tscn" id="3_e00df"]
-[ext_resource type="Script" path="res://obstacle.gd" id="4_x3npr"]
 [ext_resource type="PackedScene" uid="uid://nrv00khg2246" path="res://victory_area.tscn" id="5_xia0m"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_k7hj2"]
@@ -41,19 +40,15 @@ default_color = Color(0.376028, 0.376029, 0.376028, 1)
 
 [node name="Obstacle" parent="Obstacles" instance=ExtResource("3_e00df")]
 position = Vector2(348, -45)
-script = ExtResource("4_x3npr")
 
 [node name="Obstacle2" parent="Obstacles" instance=ExtResource("3_e00df")]
 position = Vector2(339, -129)
-script = ExtResource("4_x3npr")
 
 [node name="Obstacle3" parent="Obstacles" instance=ExtResource("3_e00df")]
 position = Vector2(911, -51)
-script = ExtResource("4_x3npr")
 
 [node name="Obstacle4" parent="Obstacles" instance=ExtResource("3_e00df")]
 position = Vector2(911, -118)
-script = ExtResource("4_x3npr")
 
 [node name="VictoryArea2D" parent="." instance=ExtResource("5_xia0m")]
 

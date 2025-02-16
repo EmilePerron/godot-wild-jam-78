@@ -2,6 +2,7 @@ extends Node2D
 class_name GameManager
 
 signal level_completed
+signal player_died(message: String)
 
 static var instance: GameManager
 
@@ -16,6 +17,7 @@ func _ready() -> void:
 	instance = self
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	level_completed.connect(Callable(self, "_on_level_completed"))
+	player_died.connect(Callable(self, "_on_player_died"))
 
 
 func _on_level_completed() -> void:
@@ -23,6 +25,10 @@ func _on_level_completed() -> void:
 	_game_is_active = false
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	get_tree().paused = true
+	
+
+func _on_player_died(message: String) -> void:
+	get_tree().quit()
 	
 
 func _notification(notification):
