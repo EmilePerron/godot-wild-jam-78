@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://nrv00khg2246"]
 
-[ext_resource type="Script" path="res://victory_area.gd" id="1_llblj"]
+[ext_resource type="Script" path="res://game/victory_area.gd" id="1_llblj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0fik0"]
 size = Vector2(409, 1197.5)

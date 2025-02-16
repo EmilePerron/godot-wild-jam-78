@@ -1,10 +1,10 @@
 [gd_scene load_steps=7 format=3 uid="uid://ddkw4hlw0b3ua"]
 
-[ext_resource type="Script" path="res://level.gd" id="1_6d627"]
+[ext_resource type="Script" path="res://game/level.gd" id="1_6d627"]
 [ext_resource type="Texture2D" uid="uid://dfg08e31v64vb" path="res://assets/cell.svg" id="2_dwq78"]
-[ext_resource type="PackedScene" uid="uid://br6g6ah8hgvd0" path="res://obstacle.tscn" id="3_e00df"]
-[ext_resource type="PackedScene" uid="uid://bgomyojoa86d7" path="res://coin.tscn" id="4_dqg5c"]
-[ext_resource type="PackedScene" uid="uid://nrv00khg2246" path="res://victory_area.tscn" id="5_xia0m"]
+[ext_resource type="PackedScene" uid="uid://br6g6ah8hgvd0" path="res://game/obstacle.tscn" id="3_e00df"]
+[ext_resource type="PackedScene" uid="uid://bgomyojoa86d7" path="res://game/coin.tscn" id="4_dqg5c"]
+[ext_resource type="PackedScene" uid="uid://nrv00khg2246" path="res://game/victory_area.tscn" id="5_xia0m"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_k7hj2"]
 a = Vector2(-240, 0)

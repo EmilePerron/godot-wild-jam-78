@@ -9,6 +9,7 @@ static var instance: GameManager
 var _game_is_active := true
 var _money_at_start_of_level := 0
 
+@export var initial_level := 1
 @export var level_completed_overlay: Control
 @export var level_failed_overlay: Control
 @export var victory_overlay: Control
@@ -23,6 +24,9 @@ func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	level_completed.connect(Callable(self, "_on_level_completed"))
 	player_died.connect(Callable(self, "_on_player_died"))
+	
+	if initial_level != 1:
+		load_level(initial_level)
 
 
 func _on_level_completed() -> void:
@@ -100,3 +104,8 @@ func load_level(level: int) -> void:
 func restart_current_level() -> void:
 	Money.set_money(_money_at_start_of_level)
 	load_level(_current_level.level_number)
+
+
+func go_to_menu() -> void:
+	get_tree().paused = false
+	get_tree().change_scene_to_file("res://main-menu.tscn")

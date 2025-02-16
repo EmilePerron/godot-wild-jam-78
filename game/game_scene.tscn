@@ -1,14 +1,14 @@
 [gd_scene load_steps=16 format=3 uid="uid://n3awr57d1wr5"]
 
-[ext_resource type="Script" path="res://player.gd" id="1_g2ulq"]
-[ext_resource type="Script" path="res://game_manager.gd" id="1_nxh51"]
+[ext_resource type="Script" path="res://game/player.gd" id="1_g2ulq"]
+[ext_resource type="Script" path="res://game/game_manager.gd" id="1_nxh51"]
 [ext_resource type="PackedScene" uid="uid://cp8erxw60ltvb" path="res://levels/level_01.tscn" id="3_etsqu"]
 [ext_resource type="Texture2D" uid="uid://g7ghmq6j1uhq" path="res://assets/yellow_circle.svg" id="5_hdlq8"]
-[ext_resource type="Script" path="res://eraser_cursor.gd" id="5_iacd0"]
-[ext_resource type="Script" path="res://eraser_counter.gd" id="6_mua3w"]
-[ext_resource type="Script" path="res://out_of_bounds_area.gd" id="7_8bbpv"]
-[ext_resource type="Script" path="res://money_label.gd" id="7_hel73"]
-[ext_resource type="Script" path="res://money.gd" id="8_qnedn"]
+[ext_resource type="Script" path="res://game/eraser_cursor.gd" id="5_iacd0"]
+[ext_resource type="Script" path="res://game/eraser_counter.gd" id="6_mua3w"]
+[ext_resource type="Script" path="res://game/out_of_bounds_area.gd" id="7_8bbpv"]
+[ext_resource type="Script" path="res://game/money_label.gd" id="7_hel73"]
+[ext_resource type="Script" path="res://game/money.gd" id="8_qnedn"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_bxn4m"]
 radius = 24.0
@@ -298,7 +298,10 @@ shape = SubResource("RectangleShape2D_4xaui")
 script = ExtResource("8_qnedn")
 
 [connection signal="pressed" from="Camera2D/LevelCompletedOverlay/CenterContainer/Modal/VBoxContainer/NextButton" to="." method="load_next_level"]
+[connection signal="pressed" from="Camera2D/LevelCompletedOverlay/CenterContainer/Modal/VBoxContainer/MenuButton" to="." method="go_to_menu"]
 [connection signal="pressed" from="Camera2D/LevelFailedOverlay/CenterContainer/Modal/VBoxContainer/TryAgainButton" to="." method="restart_current_level"]
+[connection signal="pressed" from="Camera2D/LevelFailedOverlay/CenterContainer/Modal/VBoxContainer/MenuButton" to="." method="go_to_menu"]
+[connection signal="pressed" from="Camera2D/VictoryOverlay/CenterContainer/Modal/VBoxContainer/MenuButton" to="." method="go_to_menu"]
 [connection signal="area_entered" from="UI/EraserCursor/EraserArea2D" to="UI/EraserCursor" method="_on_eraser_area_2d_area_entered"]
 [connection signal="area_exited" from="UI/EraserCursor/EraserArea2D" to="UI/EraserCursor" method="_on_eraser_area_2d_area_exited"]
 [connection signal="input_event" from="UI/EraserCursor/EraserArea2D" to="UI/EraserCursor" method="_on_eraser_area_2d_input_event"]

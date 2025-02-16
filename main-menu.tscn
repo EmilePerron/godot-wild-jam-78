@@ -1,0 +1,89 @@
+[gd_scene load_steps=6 format=3 uid="uid://b44e868pxmcoj"]
+
+[ext_resource type="Script" path="res://main_menu.gd" id="1_ga5a4"]
+[ext_resource type="Texture2D" uid="uid://dfg08e31v64vb" path="res://assets/cell.svg" id="1_ridsi"]
+[ext_resource type="FontFile" uid="uid://ccjm25febi27g" path="res://assets/fonts/IndieFlower-Regular.ttf" id="2_3268u"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_333y7"]
+font = ExtResource("2_3268u")
+font_size = 72
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_4j7au"]
+font = ExtResource("2_3268u")
+font_size = 32
+font_color = Color(0, 0, 0, 1)
+
+[node name="Main-menu" type="Node2D"]
+script = ExtResource("1_ga5a4")
+
+[node name="GridPaper" type="Sprite2D" parent="."]
+z_index = -1
+texture_filter = 1
+texture_repeat = 2
+texture = ExtResource("1_ridsi")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 1024, 768)
+metadata/_edit_lock_ = true
+
+[node name="Title" type="Label" parent="."]
+offset_top = 185.0
+offset_right = 1024.0
+offset_bottom = 291.0
+text = "Some Game Name"
+label_settings = SubResource("LabelSettings_333y7")
+horizontal_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+offset_top = 366.0
+offset_right = 1024.0
+offset_bottom = 530.0
+
+[node name="PlayButton" type="TextureButton" parent="VBoxContainer"]
+custom_minimum_size = Vector2(200, 80)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Label" type="Label" parent="VBoxContainer/PlayButton"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -28.0
+offset_top = -24.0
+offset_right = 28.0
+offset_bottom = 24.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Play"
+label_settings = SubResource("LabelSettings_4j7au")
+metadata/_edit_lock_ = true
+
+[node name="SettingsButton" type="TextureButton" parent="VBoxContainer"]
+custom_minimum_size = Vector2(200, 80)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Label" type="Label" parent="VBoxContainer/SettingsButton"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -28.0
+offset_top = -24.0
+offset_right = 28.0
+offset_bottom = 24.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Settings"
+label_settings = SubResource("LabelSettings_4j7au")
+metadata/_edit_lock_ = true
+
+[connection signal="pressed" from="VBoxContainer/PlayButton" to="." method="_on_play_button_pressed"]
