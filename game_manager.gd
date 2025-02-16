@@ -7,6 +7,7 @@ signal player_died(message: String)
 static var instance: GameManager
 
 var _game_is_active := true
+var _money_at_start_of_level := 0
 
 @export var level_completed_overlay: Control
 @export var level_failed_overlay: Control
@@ -59,6 +60,7 @@ func _show_loader() -> void:
 
 
 func load_next_level() -> void:
+	_money_at_start_of_level = Money.get_money()
 	load_level(_current_level.level_number + 1)
 	
 
@@ -96,4 +98,5 @@ func load_level(level: int) -> void:
 
 
 func restart_current_level() -> void:
+	Money.set_money(_money_at_start_of_level)
 	load_level(_current_level.level_number)

@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://cp8erxw60ltvb"]
+[gd_scene load_steps=8 format=3 uid="uid://cp8erxw60ltvb"]
 
 [ext_resource type="Script" path="res://level.gd" id="1_rqyhv"]
 [ext_resource type="Texture2D" uid="uid://dfg08e31v64vb" path="res://assets/cell.svg" id="2_bsl8d"]
 [ext_resource type="PackedScene" uid="uid://br6g6ah8hgvd0" path="res://obstacle.tscn" id="3_a7euj"]
 [ext_resource type="PackedScene" uid="uid://dyvakus2uhyay" path="res://block.tscn" id="3_vj5xm"]
 [ext_resource type="PackedScene" uid="uid://nrv00khg2246" path="res://victory_area.tscn" id="5_lxqyh"]
+[ext_resource type="PackedScene" uid="uid://bgomyojoa86d7" path="res://coin.tscn" id="5_q07l5"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_k7hj2"]
 a = Vector2(-240, 0)
@@ -55,6 +56,11 @@ position = Vector2(911, -51)
 
 [node name="Obstacle4" parent="Obstacles" instance=ExtResource("3_a7euj")]
 position = Vector2(911, -118)
+
+[node name="Coins" type="Node2D" parent="."]
+
+[node name="Coin" parent="Coins" instance=ExtResource("5_q07l5")]
+position = Vector2(316, -45)
 
 [node name="VictoryArea2D" parent="." instance=ExtResource("5_lxqyh")]
 
