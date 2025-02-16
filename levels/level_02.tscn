@@ -11,7 +11,7 @@ b = Vector2(11200, 0)
 
 [node name="Level" type="Node2D" node_paths=PackedStringArray("victory_area")]
 script = ExtResource("1_6d627")
-speed_multiplier = null
+level_number = 2
 victory_area = NodePath("VictoryArea2D")
 
 [node name="GridPaper" type="Sprite2D" parent="."]

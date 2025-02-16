@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://n3awr57d1wr5"]
+[gd_scene load_steps=14 format=3 uid="uid://n3awr57d1wr5"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_g2ulq"]
 [ext_resource type="Script" path="res://game_manager.gd" id="1_nxh51"]
@@ -18,6 +18,10 @@ font_color = Color(0, 0, 0, 1)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_3e3hn"]
 radius = 24.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_xe1pq"]
+font_size = 24
+font_color = Color(0, 0, 0, 1)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_x0ui8"]
 size = Vector2(300, 1537)
@@ -135,6 +139,14 @@ value = 3.0
 fill_mode = 2
 show_percentage = false
 script = ExtResource("6_mua3w")
+
+[node name="LevelLabel" type="Label" parent="UI"]
+offset_left = -219.0
+offset_top = 221.0
+offset_right = -139.0
+offset_bottom = 255.0
+text = "Level 1"
+label_settings = SubResource("LabelSettings_xe1pq")
 
 [node name="OutOfBoundsArea" type="Area2D" parent="."]
 script = ExtResource("7_8bbpv")

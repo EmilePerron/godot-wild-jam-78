@@ -1,8 +1,9 @@
 extends Node2D
+class_name Level
 
 const BASE_SPEED := 250
 
-@export var level_number: int = 1
+@export var level_number: int
 @export var speed_multiplier := 1.0
 @export var victory_area: Area2D
 

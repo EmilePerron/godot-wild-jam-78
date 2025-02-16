@@ -11,6 +11,7 @@ var _game_is_active := true
 @export var win_overlay: Control
 
 @onready var _current_level = $Level
+@onready var _current_level_label = $UI/LevelLabel
 
 
 func _ready() -> void:
@@ -52,12 +53,20 @@ func load_level(level: int) -> void:
 	_show_loader()
 	
 	var padded_level = ("0" if level < 10 else "") + str(level)
-	var new_level_scene = load("res://levels/level_" + padded_level + ".tscn")
+	var new_level_path = "res://levels/level_" + padded_level + ".tscn"
 	
+	# When there's no more levels, show a YOU WIN! screen
+	if not ResourceLoader.exists(new_level_path, "PackedScene"):
+		return 
+	
+	var new_level_scene = load(new_level_path)
 	var previous_level = _current_level
 	_current_level = new_level_scene.instantiate()
 	previous_level.add_sibling(_current_level)
 	previous_level.queue_free()
+	
+	_current_level_label.text = "Level " + str(level)
+	EraserCounter.refill()
 	
 	win_overlay.visible = false
 	_game_is_active = true
