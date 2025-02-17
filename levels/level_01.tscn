@@ -67,4 +67,10 @@ position = Vector2(670, -165)
 [node name="CollisionShape2D" parent="VictoryArea2D" index="0"]
 position = Vector2(2424, -183)
 
+[node name="Tutorial" type="Node2D" parent="."]
+
+[node name="Label" type="Label" parent="Tutorial"]
+offset_right = 40.0
+offset_bottom = 23.0
+
 [editable path="VictoryArea2D"]

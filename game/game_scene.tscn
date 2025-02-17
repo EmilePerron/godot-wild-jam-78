@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://n3awr57d1wr5"]
+[gd_scene load_steps=24 format=3 uid="uid://n3awr57d1wr5"]
 
 [ext_resource type="Script" path="res://game/player.gd" id="1_g2ulq"]
 [ext_resource type="Script" path="res://game/game_manager.gd" id="1_nxh51"]
@@ -9,8 +9,10 @@
 [ext_resource type="Script" path="res://game/eraser_cursor.gd" id="5_iacd0"]
 [ext_resource type="Script" path="res://game/eraser_counter.gd" id="6_mua3w"]
 [ext_resource type="Script" path="res://game/out_of_bounds_area.gd" id="7_8bbpv"]
+[ext_resource type="Script" path="res://game/eraser.gd" id="7_8jy88"]
 [ext_resource type="Script" path="res://game/money_label.gd" id="7_hel73"]
 [ext_resource type="Script" path="res://game/money.gd" id="8_qnedn"]
+[ext_resource type="Texture2D" uid="uid://mmfwcx8kf5o5" path="res://assets/images/eraser.svg" id="12_ejj45"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_bxn4m"]
 radius = 11.6715
@@ -22,6 +24,72 @@ font_color = Color(0, 0, 0, 1)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_3e3hn"]
 radius = 24.0
+
+[sub_resource type="Animation" id="Animation_6l8xt"]
+resource_name = "Erase"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.133333, 0.233333, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(-10, 5), Vector2(15, -5), Vector2(-12, 8), Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, -0.0523599]
+}
+
+[sub_resource type="Animation" id="Animation_62xeg"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_xyw0c"]
+resource_name = "Idle"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_b01ff"]
+_data = {
+"Erase": SubResource("Animation_6l8xt"),
+"Idle": SubResource("Animation_xyw0c"),
+"RESET": SubResource("Animation_62xeg")
+}
 
 [sub_resource type="LabelSettings" id="LabelSettings_xe1pq"]
 font_size = 24
@@ -258,11 +326,28 @@ metadata/_edit_lock_ = true
 shape = SubResource("CircleShape2D_3e3hn")
 metadata/_edit_lock_ = true
 
-[node name="EraserCounter" type="ProgressBar" parent="UI"]
-offset_left = -218.0
-offset_top = -505.0
-offset_right = -198.0
-offset_bottom = -405.0
+[node name="Eraser" type="Sprite2D" parent="UI"]
+position = Vector2(509, 45)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("12_ejj45")
+centered = false
+script = ExtResource("7_8jy88")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="UI/Eraser"]
+libraries = {
+"": SubResource("AnimationLibrary_b01ff")
+}
+autoplay = "Idle"
+
+[node name="Timer" type="Timer" parent="UI/Eraser"]
+wait_time = 0.25
+
+[node name="EraserCounter" type="ProgressBar" parent="UI/Eraser"]
+offset_left = 428.0
+offset_top = 176.0
+offset_right = 448.0
+offset_bottom = 276.0
+rotation = 1.09996
 max_value = 3.0
 step = 1.0
 value = 3.0
@@ -316,5 +401,6 @@ script = ExtResource("8_qnedn")
 [connection signal="area_entered" from="UI/EraserCursor/EraserArea2D" to="UI/EraserCursor" method="_on_eraser_area_2d_area_entered"]
 [connection signal="area_exited" from="UI/EraserCursor/EraserArea2D" to="UI/EraserCursor" method="_on_eraser_area_2d_area_exited"]
 [connection signal="input_event" from="UI/EraserCursor/EraserArea2D" to="UI/EraserCursor" method="_on_eraser_area_2d_input_event"]
+[connection signal="timeout" from="UI/Eraser/Timer" to="UI/Eraser" method="stop_erasing"]
 [connection signal="body_entered" from="OutOfBoundsArea" to="OutOfBoundsArea" method="_on_body_entered"]
 [connection signal="money_updated" from="State/Money" to="UI/MoneyLabel" method="_on_money_money_updated"]

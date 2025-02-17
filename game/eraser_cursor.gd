@@ -49,6 +49,7 @@ func _on_eraser_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx
 		# TODO: Show some kind of error indicator
 		return
 	
+	Eraser.erase(hovered_obstacle)
 	EraserCounter.decrement()
 	hovered_obstacle.queue_free()
 	hovered_obstacle = null
