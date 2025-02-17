@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dfg08e31v64vb"
-path="res://.godot/imported/cell.svg-30564c1ce77a98da202a07b9dc1bd795.ctex"
+uid="uid://3ltulwyw3ido"
+path="res://.godot/imported/skull-circle-colored-optimized.png-5178f2938b10f6158bc22ec5002a8be4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/cell.svg"
-dest_files=["res://.godot/imported/cell.svg-30564c1ce77a98da202a07b9dc1bd795.ctex"]
+source_file="res://assets/images/skull-circle-colored-optimized.png"
+dest_files=["res://.godot/imported/skull-circle-colored-optimized.png-5178f2938b10f6158bc22ec5002a8be4.ctex"]
 
 [params]
 
@@ -32,6 +32,3 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
-svg/scale=1.0
-editor/scale_with_editor_scale=false
-editor/convert_colors_with_editor_theme=false

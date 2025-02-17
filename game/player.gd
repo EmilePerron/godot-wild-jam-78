@@ -35,5 +35,8 @@ func _physics_process(delta: float) -> void:
 	# Handle jump.
 	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
+		
+	# Adjust player / stick rotation based on player Y position
+	rotation_degrees = (position.y * 0.1)
 
 	move_and_slide()
