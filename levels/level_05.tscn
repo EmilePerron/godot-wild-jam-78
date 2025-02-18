@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://gcj52w6mmu7c"]
+[gd_scene load_steps=10 format=3 uid="uid://gcj52w6mmu7c"]
 
 [ext_resource type="Script" path="res://game/level.gd" id="1_so6fr"]
 [ext_resource type="Texture2D" uid="uid://dfg08e31v64vb" path="res://assets/images/cell.svg" id="2_q4ssr"]
 [ext_resource type="PackedScene" uid="uid://dyvakus2uhyay" path="res://game/block.tscn" id="3_0wbhp"]
+[ext_resource type="Script" path="res://game/rotator.gd" id="4_e10w2"]
 [ext_resource type="PackedScene" uid="uid://br6g6ah8hgvd0" path="res://game/obstacle.tscn" id="4_rxs68"]
 [ext_resource type="PackedScene" uid="uid://bgomyojoa86d7" path="res://game/coin.tscn" id="5_1oitm"]
 [ext_resource type="Script" path="res://game/victory_area_collision_shape.gd" id="6_ab37i"]
@@ -148,22 +149,62 @@ position = Vector2(801, -48)
 [node name="Block28" parent="Blocks" instance=ExtResource("3_0wbhp")]
 position = Vector2(2097, -40)
 
-[node name="Block31" parent="Blocks" instance=ExtResource("3_0wbhp")]
-position = Vector2(2487, -44)
-
 [node name="Block29" parent="Blocks" instance=ExtResource("3_0wbhp")]
 position = Vector2(2097, -130)
 
 [node name="Block30" parent="Blocks" instance=ExtResource("3_0wbhp")]
 position = Vector2(2017, -214)
 
+[node name="Rotator" type="Node2D" parent="Blocks"]
+position = Vector2(2852, -350)
+script = ExtResource("4_e10w2")
+
+[node name="Block38" parent="Blocks/Rotator" instance=ExtResource("3_0wbhp")]
+position = Vector2(-247, 4)
+
+[node name="Block39" parent="Blocks/Rotator" instance=ExtResource("3_0wbhp")]
+position = Vector2(-167, 2)
+
+[node name="Block40" parent="Blocks/Rotator" instance=ExtResource("3_0wbhp")]
+position = Vector2(-83, 2)
+
+[node name="Block41" parent="Blocks/Rotator" instance=ExtResource("3_0wbhp")]
+position = Vector2(1, 2)
+
+[node name="Block42" parent="Blocks/Rotator" instance=ExtResource("3_0wbhp")]
+position = Vector2(83, 2)
+
+[node name="Block43" parent="Blocks/Rotator" instance=ExtResource("3_0wbhp")]
+position = Vector2(163, 0)
+
+[node name="Block44" parent="Blocks/Rotator" instance=ExtResource("3_0wbhp")]
+position = Vector2(247, 0)
+
+[node name="Block45" parent="Blocks/Rotator" instance=ExtResource("3_0wbhp")]
+position = Vector2(331, 0)
+
 [node name="Obstacles" type="Node2D" parent="."]
 
 [node name="Obstacle" parent="Obstacles" instance=ExtResource("4_rxs68")]
 position = Vector2(1983, -776)
 
+[node name="Obstacle2" parent="Obstacles" instance=ExtResource("4_rxs68")]
+position = Vector2(2751, -446)
+
+[node name="Obstacle3" parent="Obstacles" instance=ExtResource("4_rxs68")]
+position = Vector2(2449, -56)
+
 [node name="Obstacle13" parent="." instance=ExtResource("4_rxs68")]
 position = Vector2(3385, -70)
+
+[node name="Obstacle16" parent="." instance=ExtResource("4_rxs68")]
+position = Vector2(3517, -224)
+
+[node name="Obstacle17" parent="." instance=ExtResource("4_rxs68")]
+position = Vector2(3773, -232)
+
+[node name="Obstacle18" parent="." instance=ExtResource("4_rxs68")]
+position = Vector2(4055, -236)
 
 [node name="Obstacle14" parent="." instance=ExtResource("4_rxs68")]
 position = Vector2(3656, -70)
@@ -174,10 +215,10 @@ position = Vector2(3899, -68)
 [node name="Coins" type="Node2D" parent="."]
 
 [node name="Coin" parent="Coins" instance=ExtResource("5_1oitm")]
-position = Vector2(1238, -233)
+position = Vector2(1486, -127)
 
 [node name="Coin2" parent="Coins" instance=ExtResource("5_1oitm")]
-position = Vector2(3113, -142)
+position = Vector2(2955, -568)
 
 [node name="Coin3" parent="Coins" instance=ExtResource("5_1oitm")]
 position = Vector2(2099, -214)

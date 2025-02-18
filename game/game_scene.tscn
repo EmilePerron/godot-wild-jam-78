@@ -110,6 +110,7 @@ victory_overlay = NodePath("Camera2D/UI/VictoryOverlay")
 
 [node name="Player" type="CharacterBody2D" parent="."]
 z_index = 1
+floor_max_angle = 1.309
 script = ExtResource("1_g2ulq")
 
 [node name="Stick" type="Sprite2D" parent="Player"]
