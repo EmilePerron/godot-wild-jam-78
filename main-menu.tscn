@@ -12,6 +12,33 @@ font = ExtResource("2_3268u")
 font_size = 32
 font_color = Color(0, 0, 0, 1)
 
+[sub_resource type="Animation" id="Animation_pp0d3"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-471, -99)]
+}
+
 [sub_resource type="Animation" id="Animation_550fn"]
 resource_name = "menu_character_move_around"
 length = 5.3
@@ -39,33 +66,6 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
 "values": [Vector2(-471, -99), Vector2(-418, -67), Vector2(-425, -449), Vector2(-471, -99)]
-}
-
-[sub_resource type="Animation" id="Animation_pp0d3"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(-471, -99)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_e3t4w"]
@@ -121,6 +121,29 @@ text = "Play"
 label_settings = SubResource("LabelSettings_4j7au")
 metadata/_edit_lock_ = true
 
+[node name="TutorialButton" type="TextureButton" parent="VBoxContainer"]
+custom_minimum_size = Vector2(200, 80)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Label" type="Label" parent="VBoxContainer/TutorialButton"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -28.0
+offset_top = -24.0
+offset_right = 28.0
+offset_bottom = 24.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Tutorial"
+label_settings = SubResource("LabelSettings_4j7au")
+metadata/_edit_lock_ = true
+
 [node name="SettingsButton" type="TextureButton" parent="VBoxContainer"]
 custom_minimum_size = Vector2(200, 80)
 layout_mode = 2
@@ -165,3 +188,4 @@ libraries = {
 autoplay = "menu_character_move_around"
 
 [connection signal="pressed" from="VBoxContainer/PlayButton" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/TutorialButton" to="." method="_on_tutorial_button_pressed"]

@@ -6,6 +6,7 @@
 size = Vector2(75, 84)
 
 [node name="Block" type="StaticBody2D"]
+metadata/erasable = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-0.5, 0)

@@ -10,6 +10,7 @@ radius = 14.0357
 
 [node name="Obstacle" type="Node2D" parent="."]
 script = ExtResource("1_asai7")
+metadata/erasable = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Obstacle"]
 scale = Vector2(0.1, 0.1)

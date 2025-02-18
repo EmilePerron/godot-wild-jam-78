@@ -16,7 +16,7 @@ var _money_at_start_of_level := 0
 
 @onready var _player = $Player
 @onready var _current_level = $Level
-@onready var _current_level_label = $UI/LevelLabel
+@onready var _current_level_label = $Camera2D/UI/LevelLabel
 
 
 func _ready() -> void:
@@ -75,6 +75,9 @@ func has_next_level() -> bool:
 		
 
 func _level_path(level: int) -> String:
+	if level == 0:
+		return "res://levels/level_tutorial.tscn"
+		
 	var padded_level = ("0" if level < 10 else "") + str(level)
 	
 	return "res://levels/level_" + padded_level + ".tscn"
