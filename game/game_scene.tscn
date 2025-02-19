@@ -103,7 +103,6 @@ size = Vector2(32589, 206.5)
 
 [node name="GameManager" type="Node2D" node_paths=PackedStringArray("level_completed_overlay", "level_failed_overlay", "victory_overlay")]
 script = ExtResource("1_nxh51")
-initial_level = 5
 level_completed_overlay = NodePath("Camera2D/UI/LevelCompletedOverlay")
 level_failed_overlay = NodePath("Camera2D/UI/LevelFailedOverlay")
 victory_overlay = NodePath("Camera2D/UI/VictoryOverlay")
